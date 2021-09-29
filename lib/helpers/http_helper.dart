@@ -21,3 +21,30 @@ Future<List<Voucher>> getVouchers() async {
   print('voucherList: ${voucherList.length}');
   return voucherList;
 }
+
+Future<List<Voucher>> getVouchersQuery() async {
+  Map<String, dynamic> parametersMap = {};
+  // parametersMap['voucher_status'] = 'open';
+  // parametersMap['consumer_mobile'] = '054-5343156';
+  parametersMap['owner_id'] = '284';
+
+  print('map: ${parametersMap.toString()}');
+  final uri = Uri.https('www.prody.me', '/api/getVouchersQuery', parametersMap);
+
+  final response =
+      await http.get(uri, headers: {"Content-Type": "application/json"});
+
+  final int statusCode = response.statusCode;
+  final String responseBody = response.body;
+  print('status Code: ${statusCode}');
+  // print('responseBody: ${responseBody}');
+  var jsonData = json.decode(responseBody);
+
+  List<Voucher> voucherList = [];
+  for (var v in jsonData) {
+    Voucher voucher = Voucher.fromJson(v);
+    voucherList.add(voucher);
+  }
+  print('voucherList: ${voucherList.length}');
+  return voucherList;
+}

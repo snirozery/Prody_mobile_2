@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:prody_mobile_2/helpers/http_helper.dart';
-import 'package:prody_mobile_2/pages/details_page.dart';
-import 'package:prody_mobile_2/widgets/voucher_card.dart';
+import 'package:prody_mobile_2/pages/voucher_list_page.dart';
+import 'package:prody_mobile_2/pages/navigation_page.dart';
 
 void main() => runApp(const MyApp());
 
@@ -12,6 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Prody - CPG Vouchers',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
       ),
@@ -35,26 +35,8 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Container(
-        color: Colors.grey.shade200,
-        child: FutureBuilder(
-          future: getVouchers(),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.data == null) {
-              return const Text("Loading...");
-            } else {
-              print('snapshot.data.length: ${snapshot.data.length}');
-              // return const Text("123...");
-              return ListView.builder(
-                itemCount: snapshot.data.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return VoucherCard(voucher: snapshot.data[index]);
-                },
-              );
-            }
-          },
-        ),
-      ),
+      drawer: NavigationPage(),
+      body: const VoucherListPage(),
     );
   }
 }

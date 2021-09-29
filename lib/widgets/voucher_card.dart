@@ -25,9 +25,7 @@ class VoucherCardOpen extends StatelessWidget {
     Key key,
     @required this.voucher,
   }) : super(key: key);
-
   final Voucher voucher;
-
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -57,21 +55,28 @@ class VoucherCardOpen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 2.0, bottom: 2.0),
+              padding: const EdgeInsets.only(left: 5.0),
               child: Row(
                 children: [
                   const Expanded(
                     flex: 2,
                     child: Text(
-                      ' Product description product',
+                      'Yolo Milk chocolate with wafer rolls',
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
-                      style: TextStyle(fontSize: 20.0),
+                      style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.deepPurple),
                     ),
                   ),
                   Expanded(
-                    child: Image.asset("assets/images/product_picture.jpg",
-                        width: 100, height: 130),
+                    // child: Image.asset("assets/images/product_picture.jpg",
+                    //     width: 100, height: 130),
+                    child: Image.network(
+                        'https://www.tnuva.co.il/uploads/f_60d43d1012712_1624522000.jpg',
+                        width: 100,
+                        height: 130),
                   ),
                 ],
               ),
